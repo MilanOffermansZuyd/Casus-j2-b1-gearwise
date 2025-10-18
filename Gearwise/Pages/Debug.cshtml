@@ -1,0 +1,102 @@
+﻿@page
+@model Gearwise.Pages.DebugModel
+@{
+}
+
+<h1>Dit is de Debug pagina</h1>
+
+
+<br />
+<br />
+
+<h3>Lijst van gebruikers:</h3>
+
+<table class="table">
+    <tr>
+        <th>Voornaam:</th>
+        <th>Achternaam:</th>
+    </tr>
+    @foreach (var u in Model.Users)
+    {
+        <tr>
+            <td>@u.FirstName</td>
+            <td>@u.LastName</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van Brands:</h3>
+
+<table class="table">
+    <tr>
+        <th>BrandID:</th>
+        <th>Naam:</th>
+    </tr>
+    @foreach (var b in Model.Brands)
+    {
+        <tr>
+            <td>@b.BrandId</td>
+            <td>@b.Name</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van Categories:</h3>
+
+<table class="table">
+    <tr>
+        <th>CategoryID:</th>
+        <th>Naam:</th>
+    </tr>
+    @foreach (var c in Model.Categories)
+    {
+        <tr>
+            <td>@c.CategoryId</td>
+            <td>@c.Name</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van PaymentOptions:</h3>
+
+<table class="table">
+    <tr>
+        <th>PaymentOptionId:</th>
+        <th>Naam:</th>
+    </tr>
+    @foreach (var p in Model.PaymentOptions)
+    {
+        <tr>
+            <td>@p.PaymentOptionId</td>
+            <td>@p.Name</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van Adverts:</h3>
+
+<table class="table">
+    <tr>
+        <th>Advert:</th>
+        <th>Title:</th>
+    </tr>
+    @foreach (var a in Model.Adverts)
+    {
+        <tr>
+            <td>@a.Id</td>
+            <td>@a.Title</td>
+        </tr>
+    }
+</table>

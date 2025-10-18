@@ -1,3 +1,6 @@
+using Gearwise.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Gearwise
 {
     public class Program
@@ -8,6 +11,12 @@ namespace Gearwise
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddDbContext<GearwiseDbContext>(
+                opt => opt.UseSqlite(
+                    builder.Configuration.GetConnectionString("GearwiseContext")));
+
+            builder.Services.AddScoped<GearwiseDatabase>();
 
             var app = builder.Build();
 
