@@ -1,4 +1,6 @@
-﻿namespace Gearwise.Models
+﻿using Gearwise.Models.Enums;
+
+namespace Gearwise.Models
 {
     public class Secretary : User
     {
