@@ -12,6 +12,8 @@ namespace Gearwise.Models
         public int? Phone { get; set; }
         public RoleStates RoleStates { get; set; }
 
+        public User() { }
+
         public User(int userId, string firstName, string lastName, string email, string password, int? phone, RoleStates roleState)
         {
             UserId = userId;
