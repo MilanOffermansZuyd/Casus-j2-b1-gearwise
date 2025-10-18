@@ -12,6 +12,8 @@ namespace Gearwise.Models
         public User Seller { get; set; }
         public List<Product> Products { get; set; }
 
+        public Advert() { }
+
         public Advert(int advertId, string title, Brand brand, Category category, User seller)
         {
             AdvertId = advertId;

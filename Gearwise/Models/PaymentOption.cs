@@ -5,6 +5,8 @@
         public int PaymentOptionId { get; set; }
         public string Name { get; set; }
 
+        public PaymentOption() { }
+
         public PaymentOption(int paymentOptionId, string name)
         {
             PaymentOptionId = paymentOptionId;
