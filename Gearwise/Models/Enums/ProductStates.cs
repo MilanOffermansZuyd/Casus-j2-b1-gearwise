@@ -1,4 +1,4 @@
-﻿namespace Gearwise.Models
+﻿namespace Gearwise.Models.Enums
 {
     public enum ProductStates
     {
