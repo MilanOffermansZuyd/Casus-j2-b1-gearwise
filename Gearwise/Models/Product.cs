@@ -11,6 +11,8 @@ namespace Gearwise.Models
         public string Description { get; set; }
         public int Price { get; set; }
 
+        public Product() { }
+
         public Product(int productId, string name, int serialNumber, ProductStates productState, string description, int price)
         {
             ProductId = productId;

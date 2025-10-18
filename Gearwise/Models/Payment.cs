@@ -6,6 +6,8 @@
         public PaymentOption PaymentOption { get; set; }
         public int Count { get; set; }
 
+        public Payment() { }
+
         public Payment(int id, PaymentOption paymentOption, int count)
         {
             Id = id;

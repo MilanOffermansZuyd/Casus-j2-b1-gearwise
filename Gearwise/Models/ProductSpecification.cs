@@ -6,6 +6,8 @@
         public Brand Brand { get; set; }
         public Category Category { get; set; }
 
+        public ProductSpecification() { }
+
         public ProductSpecification(int productSpecificationId, Brand brand, Category category)
         {
             ProductSpecificationId = productSpecificationId;
