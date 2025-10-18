@@ -4,7 +4,7 @@ namespace Gearwise.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -12,9 +12,9 @@ namespace Gearwise.Models
         public int? Phone { get; set; }
         public RoleStates RoleStates { get; set; }
 
-        public User(int id, string firstName, string lastName, string email, string password, int? phone, RoleStates roleState)
+        public User(int userId, string firstName, string lastName, string email, string password, int? phone, RoleStates roleState)
         {
-            Id = id;
+            UserId = userId;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
