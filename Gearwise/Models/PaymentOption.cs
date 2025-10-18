@@ -2,12 +2,12 @@
 {
     public class PaymentOption
     {
-        public int Id { get; set; }
+        public int PaymentOptionId { get; set; }
         public string Name { get; set; }
 
-        public PaymentOption(int id, string name)
+        public PaymentOption(int paymentOptionId, string name)
         {
-            Id = id;
+            PaymentOptionId = paymentOptionId;
             Name = name;
         }
     }
