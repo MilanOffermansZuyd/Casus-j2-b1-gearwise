@@ -6,10 +6,6 @@
 
 <h1>Adverts</h1>
 
-<a class="btn btn-outline-primary float-end">
-    Login / sign-up
-</a>
-
 @if (Model.Adverts is not null)
 {
 
@@ -22,8 +18,8 @@
                         <div class="card-body">
                             <h5 class="card-title">@item.Title</h5>
                             <p class="card-text">
-                                Merk:@item.Brand.Name <br />
-                                Categorie:@item.Category.Name <br />
+                                Merk: @item.Brand.Name <br />
+                                Categorie: @item.Category.Name <br />
                                 Verkoper: @item.Seller.FirstName <br />
                                 Producten: @item.Products.Count
                             </p>
@@ -36,5 +32,4 @@
             }
         </div>
     </div>
-
 }

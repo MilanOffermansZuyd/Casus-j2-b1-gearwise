@@ -26,10 +26,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Debug">Debug</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a> *@
+                        @* </li> *@
                     </ul>
+                    <div class="d-flex">
+                        <a asp-page="/Account/Login" class="btn btn-outline-primary me-2">Log in</a>
+                        <a asp-page="/Account/Register" class="btn btn-outline-primary ">Register</a>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -1,6 +1,7 @@
 ﻿@page
 @model Gearwise.Pages.DebugModel
 @{
+    ViewData["Title"] = "Debug Page";
 }
 
 <h1>Dit is de Debug pagina</h1>
@@ -13,14 +14,26 @@
 
 <table class="table">
     <tr>
+        <th>UserId:</th>
         <th>Voornaam:</th>
         <th>Achternaam:</th>
+        <th>Volledige naam:</th>
+        <th>Email:</th>
+        <th>Wachtwoord:</th>
+        <th>Telefoonnummer:</th>
+        <th>Rol:</th>
     </tr>
     @foreach (var u in Model.Users)
     {
         <tr>
+            <td>@u.UserId</td>
             <td>@u.FirstName</td>
             <td>@u.LastName</td>
+            <td>@u.FullName</td>
+            <td>@u.Email</td>
+            <td>@u.Password</td>
+            <td>@u.Phone</td>
+            <td>@u.RoleStates</td>
         </tr>
     }
 </table>
@@ -32,7 +45,7 @@
 
 <table class="table">
     <tr>
-        <th>BrandID:</th>
+        <th>BrandId:</th>
         <th>Naam:</th>
     </tr>
     @foreach (var b in Model.Brands)
@@ -85,5 +98,144 @@
 <br />
 <br />
 
+<h3>Lijst van Messages:</h3>
+
+<table class="table">
+    <tr>
+        <th>MessageId:</th>
+        <th>SenderUserId:</th>
+        <th>Titel:</th>
+        <th>Bericht:</th>
+    </tr>
+    @foreach (var m in Model.Messages)
+    {
+        <tr>
+            <td>@m.MessageId</td>
+            <td>@m.Sender.UserId</td>
+            <td>@m.Title</td>
+            <td>@m.Body</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van Payments:</h3>
+
+<table class="table">
+    <tr>
+        <th>PaymentId:</th>
+        <th>Betalingsoptie:</th>
+        <th>Aantal:</th>
+    </tr>
+    @foreach (var p in Model.Payments)
+    {
+        <tr>
+            <td>@p.PaymentId</td>
+            <td>@p.PaymentOption.Name</td>
+            <td>@p.Count</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van Products:</h3>
+
+<table class="table">
+    <tr>
+        <th>ProductId:</th>
+        <th>Naam:</th>
+        <th>Serienummer:</th>
+        <th>Status:</th>
+        <th>Beschrijving:</th>
+        <th>Prijs:</th>
+    </tr>
+    @foreach (var p in Model.Products)
+    {
+        <tr>
+            <td>@p.ProductId</td>
+            <td>@p.Name</td>
+            <td>@p.Serialnumber</td>
+            <td>@p.ProductState</td>
+            <td>@p.Description</td>
+            <td>@p.Price</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van Products Specifications:</h3>
+
+<table class="table">
+    <tr>
+        <th>ProductSpecificationId:</th>
+        <th>Merk:</th>
+        <th>Categorie:</th>
+
+    </tr>
+    @foreach (var ps in Model.ProductSpecifications)
+    {
+        <tr>
+            <td>@ps.ProductSpecificationId</td>
+            <td>@ps.Brand.Name</td>
+            <td>@ps.Category.Name</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<h3>Lijst van GearwisePedia:</h3>
+
+<table class="table">
+    <tr>
+        <th>GearwisePediaId:</th>
+        <th>Titel:</th>
+        <th>ProductSpecificationId:</th>
+
+    </tr>
+    @foreach (var g in Model.GearwisePedias)
+    {
+        <tr>
+            <td>@g.GearwisePediaId</td>
+            <td>@g.Title</td>
+            <td>@g.ProductSpecification.ProductSpecificationId</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
 <h3>Lijst van Adverts:</h3>
+
+<table class="table">
+    <tr>
+        <th>AdvertId:</th>
+        <th>Titel:</th>
+        <th>Merk:</th>
+        <th>Categorie</th>
+        <th>Verkoper:</th>
+    </tr>
+    @foreach (var a in Model.Adverts)
+    {
+        <tr>
+            <td>@a.AdvertId</td>
+            <td>@a.Title</td>
+            <td>@a.Brand.Name</td>
+            <td>@a.Category.Name</td>
+            <td>@a.Seller.FullName</td>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
 

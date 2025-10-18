@@ -4,7 +4,7 @@ namespace Gearwise.Models
 {
     public class Secretary : User
     {
-        public Secretary(int id, string firstName, string lastName, string email, string password, int? phone)
+        public Secretary(int id, string firstName, string lastName, string email, string password, string? phone)
             : base(id, firstName, lastName, email, password, phone, RoleStates.Secretary)
         {
         }

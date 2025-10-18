@@ -5,8 +5,8 @@
         public User Company { get; set; }
         public int KvKNumber { get; set; }
 
-        public ValidationRequest(User sender, string title, string body, User company, int kvkNumber)
-            : base(sender, title, body)
+        public ValidationRequest(int messageId, int senderId, string title, string body, User company, int kvkNumber)
+            : base(messageId, senderId, title, body)
         {
             Company = company;
             KvKNumber = kvkNumber;
