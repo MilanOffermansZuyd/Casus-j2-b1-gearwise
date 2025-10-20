@@ -7,7 +7,7 @@ namespace Gearwise.Models
         public string CompanyName { get; set; }
         public string KvKNumber { get; set; }
 
-        public Company(int id, string firstName, string lastName, string email, string password, int? phone, RoleStates roleState, string companyName, string kvkNumber):
+        public Company(int id, string firstName, string lastName, string email, string password, string? phone, RoleStates roleState, string companyName, string kvkNumber):
             base(id, firstName, lastName, email, password, phone, roleState)
         {
             CompanyName = companyName;

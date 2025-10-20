@@ -7,17 +7,29 @@ namespace Gearwise.Pages
 {
     public class DebugModel : PageModel
     {
-        public List<User> Users { get; set; } = null!;
+        private readonly GearwiseDatabase Database;
 
-        public List<Brand> Brands { get; set; } = null;
+        public List<User> Users { get; set; } = new List<User>();
 
-        public List<Category> Categories { get; set; } = null!; 
+        public List<Brand> Brands { get; set; } = new List<Brand>();
 
-        public List<PaymentOption> PaymentOptions { get; set; }
+        public List<Category> Categories { get; set; } = new List<Category>();
 
-        public List<Advert> Adverts { get; set; } = null!;
+        public List<PaymentOption> PaymentOptions { get; set; } = new List<PaymentOption>();
 
-        private GearwiseDatabase Database;
+        public List<Message> Messages { get; set; } = new List<Message>();
+
+        public List<Payment> Payments { get; set; } = new List<Payment> { };
+
+        public List<Product> Products { get; set; } = new List<Product> { };
+
+        public List<ProductSpecification> ProductSpecifications { get; set; } = new List<ProductSpecification> { };
+
+        public List<GearwisePedia> GearwisePedias { get; set; } = new List<GearwisePedia>();
+
+        public List<Advert> Adverts { get; set; } = new List<Advert>();
+
+        
         public DebugModel(GearwiseDatabase database)
         {
             Database = database;
@@ -25,17 +37,25 @@ namespace Gearwise.Pages
 
         public async Task OnGet()
         {
-            Users = await Database.GetUsersAsync();
+            Users = await Database.GetUsersDEBUGAsync();
 
-            Brands = await Database.GetBrandsAsync();
+            Brands = await Database.GetBrandsDEBUGAsync();
 
-            Categories = await Database.GetCategoriesAsync();
+            Categories = await Database.GetCategoriesDEBUGAsync();
 
-            PaymentOptions = await Database.GetPaymentOptionsAsync();
+            PaymentOptions = await Database.GetPaymentOptionsDEBUGAsync();
 
+            Messages = await Database.GetMessagesDEBUGAsync();
 
+            Payments = await Database.GetPaymentsDEBUGAsync();
 
-            Adverts = await Database.GetAdvertsAsync();
+            Products = await Database.GetProductsDEBUGAsync();
+
+            ProductSpecifications = await Database.GetProductSpecificationsDEBUGAsync();
+
+            GearwisePedias = await Database.GetGearwisePediasDEBUGAsync();
+
+            Adverts = await Database.GetAdvertsDEBUGAsync();
         }
     }
 }

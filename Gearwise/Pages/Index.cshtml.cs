@@ -1,30 +1,30 @@
+using Gearwise.Data;
 using Gearwise.Models;
 using Gearwise.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gearwise.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public List<Advert> Adverts = new List<Advert>()
-        {
-            new Advert(1,"tst", new Brand(1, "ets"), new Category(1 , "et"), new User(1, "tst", "test", "test", "pass", 1, RoleStates.Admin)),
-            new Advert(1,"eff", new Brand(1, "ff"), new Category(1 , "ff"), new User(1, "hoi", "test", "test", "pass", 1, RoleStates.Admin))
-        };
+        private readonly GearwiseDatabase Database;
 
+        public List<Advert> Adverts { get; set; } = new List<Advert>();
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, GearwiseDatabase database)
         {
             _logger = logger;
+            Database = database;
         }
 
 
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-
+            Adverts = await Database.GetAdvertsAsync();
         }
     }
 }

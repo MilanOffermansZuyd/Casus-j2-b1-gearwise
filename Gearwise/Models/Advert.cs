@@ -7,20 +7,23 @@ namespace Gearwise.Models
     {
         public int AdvertId { get; set; }
         public string Title { get; set; }
+        public int BrandId { get; set; }
         public Brand Brand { get; set; }
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public int SellerId { get; set; }
         public User Seller { get; set; }
         public List<Product> Products { get; set; }
 
         public Advert() { }
 
-        public Advert(int advertId, string title, Brand brand, Category category, User seller)
+        public Advert(int advertId, string title, int brandId, int categoryId, int sellerId)
         {
             AdvertId = advertId;
             Title = title;
-            Brand = brand;
-            Category = category;
-            Seller = seller;
+            BrandId = brandId;
+            CategoryId = categoryId;
+            SellerId = sellerId;
             Products = new List<Product>();
         }
     }
