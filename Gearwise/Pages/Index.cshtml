@@ -2,34 +2,51 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-}    
+}
 
 <h1>Adverts</h1>
 
 @if (Model.Adverts is not null)
 {
-
     <div class="container mt-4">
         <div class="row">
-            @foreach (var item in Model.Adverts)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Title</h5>
-                            <p class="card-text">
-                                Merk: @item.Brand.Name <br />
-                                Categorie: @item.Category.Name <br />
-                                Verkoper: @item.Seller.FirstName <br />
-                                Producten: @item.Products.Count
-                            </p>
-                        </div>
-                        <div class="card-footer text-end bg-transparent border-top-0">
-                            <a class="btn btn-sm btn-primary">Bekijk</a>
-                        </div>
-                    </div>
+            <!-- Linkerkant: sorteerknoppen -->
+            <div class="col-md-3">
+                <div class="d-flex flex-column gap-2">
+                    <h5 class="mb-3">Sorteer op:</h5>
+                    <a asp-page="" asp-route-sortBy="category_asc" class="btn btn-outline-primary w-100">Categorie ↑</a>
+                    <a asp-page="" asp-route-sortBy="category_desc" class="btn btn-outline-primary w-100">Categorie ↓</a>
+                    <a asp-page="" asp-route-sortBy="brand_asc" class="btn btn-outline-primary w-100">Merk ↑</a>
+                    <a asp-page="" asp-route-sortBy="brand_desc" class="btn btn-outline-primary w-100">Merk ↓</a>
+                    <a asp-page="" asp-route-sortBy="title_asc" class="btn btn-outline-primary w-100">Titel ↑</a>
+                    <a asp-page="" asp-route-sortBy="title_desc" class="btn btn-outline-primary w-100">Titel ↓</a>
                 </div>
-            }
+            </div>
+
+            <!-- Rechterkant: advertenties -->
+            <div class="col-md-9">
+                <div class="row">
+                    @foreach (var item in Model.Adverts)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Title</h5>
+                                    <p class="card-text">
+                                        Merk: @item.Brand.Name <br />
+                                        Categorie: @item.Category.Name <br />
+                                        Verkoper: @item.Seller.FirstName <br />
+                                        Producten: @item.Products.Count
+                                    </p>
+                                </div>
+                                <div class="card-footer text-end bg-transparent border-top-0">
+                                    <a class="btn btn-sm btn-primary">Bekijk</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 }

@@ -95,7 +95,8 @@ namespace Gearwise.Data
 
             modelBuilder.Entity<Advert>().HasData(
                 new Advert(1, "Banden te koop", 1, 1, 1),
-                new Advert(2, "Schokdemper te koop", 2, 2, 3)
+                new Advert(2, "Schokdemper te koop", 2, 2, 3),
+                new Advert(3, "Uitlaat te koop", 1, 3, 3)
                 );
 
             modelBuilder.Entity<Message>().HasData(
