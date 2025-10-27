@@ -10,10 +10,12 @@ namespace Gearwise.Models
         public ProductStates ProductState { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
+        public int AdvertId { get; set; }
+        public Advert Advert { get; set; }
 
         public Product() { }
 
-        public Product(int productId, string name, int serialNumber, ProductStates productState, string description, int price)
+        public Product(int productId, string name, int serialNumber, ProductStates productState, string description, int price, int advertId)
         {
             ProductId = productId;
             Name = name;
@@ -21,6 +23,7 @@ namespace Gearwise.Models
             ProductState = productState;
             Description = description;
             Price = price;
+            AdvertId = advertId;
         }
     }
 }

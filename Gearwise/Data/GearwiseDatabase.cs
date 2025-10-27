@@ -134,6 +134,20 @@ namespace Gearwise.Data
                 .FirstOrDefaultAsync(a => a.AdvertId == id);
         }
 
+        public async Task<GearwisePedia?> GetGearwisePediaByAdvertAsync(int brandId, int categoryId)
+        {
+            var productSpecification = await Database.ProductSpecifications
+                .FirstOrDefaultAsync(ps => ps.BrandId == brandId && ps.CategoryId == categoryId);
+
+            if (productSpecification == null)
+            {
+                return null;
+            }
+
+            return await Database.GearwisePedias
+                .FirstOrDefaultAsync(gp => gp.ProductSpecificationId == productSpecification.ProductSpecificationId);
+        }
+
         // CREATE
         public async Task<Advert> AddAdvertAsync(Advert advert)
         {
