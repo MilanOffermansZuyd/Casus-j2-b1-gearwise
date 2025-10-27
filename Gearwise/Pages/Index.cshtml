@@ -40,7 +40,11 @@
                                     </p>
                                 </div>
                                 <div class="card-footer text-end bg-transparent border-top-0">
-                                    <a class="btn btn-sm btn-primary">Bekijk</a>
+                                    <form method="post" asp-page="ProductPage">
+                                        <button type="submit" class="btn btn-success" name="ProductId" value="@item.Products.First().ProductId">
+                                            Bekijk
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
