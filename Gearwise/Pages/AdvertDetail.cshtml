@@ -12,10 +12,11 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">@Model.Product.Name</h4>
-            <p><strong>Serial Number:</strong> @Model.Product.Serialnumber</p>
-            <p><strong>Status:</strong> @Model.Product.ProductState</p>
-            <p><strong>Description:</strong> @Model.Product.Description</p>
-            <p><strong>Price:</strong> €@Model.Product.Price</p>
+            <p>Serial: Number: @Model.Product.Serialnumber</p>
+            <p>Status:@Model.Product.ProductState</p>
+            <p>Description: @Model.Product.Description</p>
+            <p>Price: €@Model.Product.Price</p>
+            <p>Count: @Model.Advert?.Products.Count</p>
         </div>
     </div>
 }
