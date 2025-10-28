@@ -9,6 +9,8 @@ namespace Gearwise.Pages
     {
         public Advert? Advert { get; set; }
 
+        public Product? Product { get; set; }
+
         public GearwisePedia? GearwisePedia { get; set; }
         public bool ShowGearwisePedia { get; set; } = false;
 
@@ -25,6 +27,7 @@ namespace Gearwise.Pages
 
             if (Advert != null)
             {
+                Product = Advert.Products.FirstOrDefault();
                 GearwisePedia = await Database.GetGearwisePediaByAdvertAsync(Advert.BrandId, Advert.CategoryId);
             }
         }
