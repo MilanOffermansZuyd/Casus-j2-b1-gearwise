@@ -78,13 +78,15 @@ namespace Gearwise.Data
 
             modelBuilder.Entity<Brand>().HasData(
                 new Brand(1, "Continental"),
-                new Brand(2, "Vredestein")
+                new Brand(2, "Vredestein"),
+                new Brand(3, "Michelen")
                 );
 
             modelBuilder.Entity<Category>().HasData(
                 new Category(1, "Banden"),
                 new Category(2, "Schokdempers"),
-                new Category(3, "Uitlaten")
+                new Category(3, "Uitlaten"),
+                new Category(4, "Velgen")
                 );
 
             modelBuilder.Entity<PaymentOption>().HasData(
@@ -94,9 +96,10 @@ namespace Gearwise.Data
                 );
 
             modelBuilder.Entity<Advert>().HasData(
-                new Advert(1, "Banden te koop", 1, 1, 1),
-                new Advert(2, "Schokdemper te koop", 2, 2, 3),
-                new Advert(3, "Uitlaat te koop", 1, 3, 3)
+                new Advert(1, "Autobanden te koop", 1, 1, 1),
+                new Advert(2, "Schokdempers te koop", 2, 2, 3),
+                new Advert(3, "Uitlaat te koop", 1, 3, 3),
+                new Advert(4, "Velgen te koop", 3, 4, 2)
                 );
 
             modelBuilder.Entity<Message>().HasData(
@@ -111,22 +114,24 @@ namespace Gearwise.Data
                 );
 
             modelBuilder.Entity<Product>().HasData(
-                new Product(1, "Uitlaat", 001, ProductStates.InStock, "Een RVS Uitlaat", 200),
-                new Product(2, "Velg", 001, ProductStates.OutOfStock, "Een RVS Velg", 200),
-                new Product(3, "Powerfilter", 001, ProductStates.Discontinued, "Voor de meeste power", 200)
+                new Product(1, "Autobanden", 001, ProductStates.InStock, "Vier nieuwe Continental autobanden", 200, 1),
+                new Product(2, "Schokdempers", 002, ProductStates.OutOfStock, "Set Vredestein schokdempers", 200, 2),
+                new Product(3, "Uitlaten", 003, ProductStates.Discontinued, "RVS uitlaat van Continental", 200, 3),
+                new Product(4, "Velgen", 004, ProductStates.InStock, "Nieuwe lichtmetalen velgen", 400, 4)
                 );
 
             modelBuilder.Entity<ProductSpecification>().HasData(
                 new ProductSpecification(1, 1, 1),
                 new ProductSpecification(2, 2, 2),
-                new ProductSpecification(3, 3, 3)
+                new ProductSpecification(3, 1, 3),
+                new ProductSpecification(4, 3, 4)
                 );
 
             modelBuilder.Entity<GearwisePedia>().HasData(
-                new GearwisePedia(1, "De", 1),
-                new GearwisePedia(2, "Gearwise", 2),
-                new GearwisePedia(3, "Pedia", 3)
+                new GearwisePedia(1, "Continental Banden", "Continental is een Duits bandenmerk bekend om zijn duurzaamheid en prestaties", 1),
+                new GearwisePedia(2, "Vredestein Schokdempers", "Vredestein produceert hoogwaardige schokdempers met een focus op comfort", 2),
+                new GearwisePedia(3, "Continental Uitlaten", "Continental biedt ook RVS uitlaten aan die bekendstaan om hun lange levensduur", 3)
                 );
-    }
+        }
     }
 }

@@ -1,0 +1,80 @@
+﻿@page "{id}"
+@model Gearwise.Pages.AdvertDetailModel
+@{
+    ViewData["Title"] = "Advert Detail";
+}
+
+<h1>Dit is de pagina van advertentie @Model.Advert?.Title</h1>
+
+<div class="mt-3 d-flex gap-2">
+    @if (Model.Advert != null)
+    {
+        if (Model.GearwisePedia != null)
+        {
+            <a asp-page-handler="GearwisePedia"
+               asp-route-id="@Model.Advert.AdvertId"
+               class="btn btn-outline-primary">Bekijk</a>
+        }
+        else
+        {
+            <a asp-page="/GearwisePedia/Create"
+               asp-route-brandId="@Model.Advert.BrandId"
+               asp-route-categoryId="@Model.Advert.CategoryId"
+               class="btn btn-outline-primary">Voeg toe</a>
+        }
+
+        <a asp-page="/Index" class="btn btn-outline-danger">Terug</a>
+    }
+</div>
+
+<hr />
+
+@if (Model.ShowGearwisePedia && Model.GearwisePedia != null)
+{
+    <div class="card mt-3 shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">@Model.GearwisePedia.Title</h3>
+            <p class="card-text">@Model.GearwisePedia.Body</p>
+
+            <div class="mt-3 d-flex gap-2">
+                <a asp-page="/GearwisePedia/Edit"
+                   asp-route-id="@Model.GearwisePedia.GearwisePediaId"
+                   class="btn btn-outline-warning">Bewerken</a>
+
+                @*<form method="post" asp-page-handler="DeleteGearwisePedia"
+                      asp-route-id="@Model.GearwisePedia.GearwisePediaId"
+                      asp-route-advertId="@Model.Advert.AdvertId"
+                      onsubmit="return confirm('Weet je zeker dat je deze GearwisePedia wilt verwijderen?');">
+                    <button type="submit" class="btn btn-outline-danger">Verwijderen</button>
+                </form>*@
+
+                <!-- Eventueel bovenste uitcommente (Verwijder bevestiging) en deze weg -->
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                    Verwijderen
+                </button>
+
+                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteLabel">GearwisePedia verwijderen</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Sluiten"></button>
+                            </div>
+                            <div class="modal-body">
+                                Weet je zeker dat je de GearwisePedia van <strong>@Model.GearwisePedia.Title</strong> wilt verwijderen?
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" asp-page-handler="DeleteGearwisePedia"
+                                      asp-route-id="@Model.GearwisePedia.GearwisePediaId"
+                                      asp-route-advertId="@Model.Advert.AdvertId">
+                                    <button type="submit" class="btn btn-danger">Verwijderen</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -26,17 +26,17 @@
             <!-- Rechterkant: advertenties -->
             <div class="col-md-9">
                 <div class="row">
-                    @foreach (var item in Model.Adverts)
+                    @foreach (var advert in Model.Adverts)
                     {
                         <div class="col-md-4 mb-4">
                             <div class="card h-100 shadow-sm">
                                 <div class="card-body">
-                                    <h5 class="card-title">@item.Title</h5>
+                                    <h5 class="card-title">@advert.Title</h5>
                                     <p class="card-text">
-                                        Merk: @item.Brand.Name <br />
-                                        Categorie: @item.Category.Name <br />
-                                        Verkoper: @item.Seller.FirstName <br />
-                                        Producten: @item.Products.Count
+                                        Merk: @advert.Brand.Name <br />
+                                        Categorie: @advert.Category.Name <br />
+                                        Verkoper: @advert.Seller.FirstName <br />
+                                        Producten: @advert.Products.Count
                                     </p>
                                 </div>
                                 <div class="card-footer text-end bg-transparent border-top-0">
