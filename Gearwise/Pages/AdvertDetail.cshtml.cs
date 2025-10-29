@@ -27,7 +27,7 @@ namespace Gearwise.Pages
 
             if (Advert != null)
             {
-                Product = Advert.Products.FirstOrDefault();
+                Product = Advert.Product;
                 GearwisePedia = await Database.GetGearwisePediaByAdvertAsync(Advert.BrandId, Advert.CategoryId);
             }
         }
@@ -35,6 +35,7 @@ namespace Gearwise.Pages
         public async Task OnGetGearwisePedia(int id)
         {
             Advert = await Database.GetAdvertAsync(id);
+            Product = Advert.Product;
 
             if (Advert != null)
             {

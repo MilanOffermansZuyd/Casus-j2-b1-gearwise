@@ -6,6 +6,9 @@
 
 <h1>Adverts</h1>
 
+<div class="card-footer text-end bg-transparent border-top-0">
+    <a asp-page="/CreateAdvert" class="btn btn-sm btn-outline-primary">aanmaken</a>
+</div>
 @if (Model.Adverts is not null)
 {
     <div class="container mt-4">
@@ -36,11 +39,22 @@
                                         Merk: @advert.Brand.Name <br />
                                         Categorie: @advert.Category.Name <br />
                                         Verkoper: @advert.Seller.FirstName <br />
-                                        Producten: @advert.Products.Count
+                                        Producten: @advert.Quantity
                                     </p>
                                 </div>
-                                <div class="card-footer text-end bg-transparent border-top-0">
-                                    <a asp-route-id="@advert.AdvertId" asp-page="/AdvertDetail" class="btn btn-sm btn-outline-primary">Bekijk</a>
+                                <!--footer-->
+                                <div style =" display: flex; justify-content: center;">
+                                    <div class="card-footer text-start bg-transparent border-top-0">
+                                        <a asp-route-id="@advert.AdvertId" asp-page="/AdvertDetail" class="btn btn-sm btn-outline-primary">Bekijk</a>
+                                    </div>
+                                    <div class="card-footer text-center bg-transparent border-top-0">
+                                        <a asp-route-id="@advert.AdvertId" asp-page="/UpdateDetails" class="btn btn-sm btn-outline-warning">aanpassen</a>
+                                    </div>
+                                    <form method="post" asp-page-handler="Delete" asp-route-id="@advert.AdvertId"
+                                          onsubmit="return confirm('Weet je zeker dat je deze advertentie wilt verwijderen?');"
+                                          class="card-footer text-end bg-transparent border-top-0">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">verwijder</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,51 @@
+﻿@page
+@model Gearwise.Pages.CreateAdvertModel
+@{
+}
+
+<h1>Create advert</h1>
+
+<form method="post">
+    <div class="form-group d-flex align-items-center">
+        <label asp-for="Advert.Title"></label>
+        <input asp-for="Advert.Title" class="form-control" />
+    </div>
+    <div class="form-group d-flex align-items-center">
+        <label asp-for="Advert.BrandId" class="me-2">Merk</label>
+        <select asp-for="Advert.BrandId" asp-items="Model.BrandList" class="form-control"></select>
+    </div>
+
+    <div class="form-group d-flex align-items-center">
+        <label asp-for="Advert.CategoryId" class="me-2">Categorie</label>
+        <select asp-for="Advert.CategoryId" asp-items="Model.CategoryList" class="form-control"></select>
+    </div>
+    <br/>
+    <h6>Disclaimer: mocht uw Merk en/of Categorie niet erbij staan vraag het de beheerder</h6>
+    <hr />
+    <div class="form-group d-flex align-items-center">
+        <label asp-for="Advert.SellerId" class="me-2">Verkoper</label>
+        <select asp-for="Advert.SellerId" asp-items="Model.SellerList" class="form-control"></select>
+    </div>
+    <hr/>
+    <div class="form-group d-flex align-items-center">
+        <label class="me-2">Product Title</label>
+        <select asp-for="Advert.ProductId" asp-items="Model.ProductList" class="form-control"></select>
+        <a asp-page="/Product/Create" class="btn btn-outline-secondary ms-2">+</a>
+    </div>
+    <br />
+    <h6>Disclaimer: mocht uw product niet erbij staan druk op (+) en voeg hem toe</h6>
+    <hr/>
+
+    <div class="form-group">
+        <label asp-for="Advert.Quantity">Aantal</label>
+        <input asp-for="Advert.Quantity" type="number" min="1" class="form-control" />
+    </div>
+
+    @if (Model.Errormessage is not null)
+    {
+        <h2 style="color:red">@Model.Errormessage</h2>    
+    }
+
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+    <a asp-page="/Index" class="btn btn-outline-danger">Terug</a>
+</form>

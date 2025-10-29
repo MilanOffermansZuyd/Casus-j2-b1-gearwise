@@ -96,10 +96,10 @@ namespace Gearwise.Data
                 );
 
             modelBuilder.Entity<Advert>().HasData(
-                new Advert(1, "Autobanden te koop", 1, 1, 1),
-                new Advert(2, "Schokdempers te koop", 2, 2, 3),
-                new Advert(3, "Uitlaat te koop", 1, 3, 3),
-                new Advert(4, "Velgen te koop", 3, 4, 2)
+                new Advert(1, "Autobanden te koop", 1, 1, 1,1, 10),
+                new Advert(2, "Schokdempers te koop", 2, 2, 3,2, 100),
+                new Advert(3, "Uitlaat te koop", 1, 3, 3,3, 23),
+                new Advert(4, "Velgen te koop", 3, 4, 2,4,1)
                 );
 
             modelBuilder.Entity<Message>().HasData(
@@ -114,7 +114,7 @@ namespace Gearwise.Data
                 );
 
             modelBuilder.Entity<Product>().HasData(
-                new Product(1, "Autobanden", 001, ProductStates.InStock, "Vier nieuwe Continental autobanden", 200, 1),
+                new Product(1, "Autobanden", 001, ProductStates.InStock, "Vier nieuwe Continental autobanden", 200,1),
                 new Product(2, "Schokdempers", 002, ProductStates.OutOfStock, "Set Vredestein schokdempers", 200, 2),
                 new Product(3, "Uitlaten", 003, ProductStates.Discontinued, "RVS uitlaat van Continental", 200, 3),
                 new Product(4, "Velgen", 004, ProductStates.InStock, "Nieuwe lichtmetalen velgen", 400, 4)
