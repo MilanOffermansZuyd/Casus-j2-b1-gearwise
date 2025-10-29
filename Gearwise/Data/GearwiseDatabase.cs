@@ -120,7 +120,7 @@ namespace Gearwise.Data
                 .Include(a => a.Brand)
                 .Include(a => a.Category)
                 .Include(a => a.Seller)
-                .Include(a => a.Products)
+                .Include(a => a.Product)
                 .ToListAsync();
         }
         
@@ -130,7 +130,7 @@ namespace Gearwise.Data
                 .Include(a => a.Brand)
                 .Include(a => a.Category)
                 .Include(a => a.Seller)
-                .Include(a => a.Products)
+                .Include(a => a.Product)
                 .FirstOrDefaultAsync(a => a.AdvertId == id);
         }
 

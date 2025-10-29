@@ -20,9 +20,9 @@ namespace Gearwise.Pages
         [BindProperty]
         public Advert? Advert { get; set; }
 
+        public string Errormessage { get; set; }
+
         [Range(1, 1000, ErrorMessage = "Aantal moet minstens 1 zijn.")]
-        public int Quantity { get; set; }
-        public int ProductId { get; set; }
         public SelectList BrandList { get; set; }
         public SelectList CategoryList { get; set; }
         public SelectList SellerList { get; set; }
@@ -53,6 +53,7 @@ namespace Gearwise.Pages
         {
             if (!ModelState.IsValid)
             {
+                Errormessage = "Pas de velden aan";
                 BrandList = new SelectList(await Context.Brands.ToListAsync(), "BrandId", "Name");
                 CategoryList = new SelectList(await Context.Categories.ToListAsync(), "CategoryId", "Name");
                 SellerList = new SelectList(await Context.Users.ToListAsync(), "UserId", "FullName");
@@ -60,10 +61,16 @@ namespace Gearwise.Pages
                 return Page();
             }
 
-            if (Advert.AdvertId == 0)
-                Context.Adverts.Add(Advert);
-            else
-                Context.Adverts.Update(Advert);
+            if (Advert is null) 
+            {
+                Errormessage = "Oops er iets fout gegaan probeer het later nog eens.";
+                BrandList = new SelectList(await Context.Brands.ToListAsync(), "BrandId", "Name");
+                CategoryList = new SelectList(await Context.Categories.ToListAsync(), "CategoryId", "Name");
+                SellerList = new SelectList(await Context.Users.ToListAsync(), "UserId", "FullName");
+                ProductList = new SelectList(await Context.Products.ToListAsync(), "ProductId", "Name");
+                return Page();
+            }
+            Context.Adverts.Add(Advert);
 
             await Context.SaveChangesAsync();
             return RedirectToPage("index");

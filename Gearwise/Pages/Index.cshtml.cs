@@ -1,9 +1,7 @@
 using Gearwise.Data;
 using Gearwise.Models;
-using Gearwise.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace Gearwise.Pages
 {
@@ -37,6 +35,11 @@ namespace Gearwise.Pages
                 _ => Adverts
             };
         }
-
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            await Database.DeleteAdvertAsync(id);
+            
+            return RedirectToPage();
+        }
     }
 }

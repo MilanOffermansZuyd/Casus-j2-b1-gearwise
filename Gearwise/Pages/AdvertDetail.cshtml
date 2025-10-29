@@ -7,16 +7,16 @@
 <h1>Dit is de pagina van advertentie @Model.Advert?.Title</h1>
 
 <h1>Product Details</h1>
-@if (Model.Product is not null)
+@if (Model.Advert is not null)
 {
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">@Model.Product.Name</h4>
-            <p>Serial: Number: @Model.Product.Serialnumber</p>
-            <p>Status:@Model.Product.ProductState</p>
-            <p>Description: @Model.Product.Description</p>
-            <p>Price: €@Model.Product.Price</p>
-            <p>Count: @Model.Advert?.Products.Count</p>
+            <h4 class="card-title">@Model.Advert.Product.Name</h4>
+            <p>Serial: Number: @Model.Advert.Product.Serialnumber</p>
+            <p>Status:@Model.Advert.Product.ProductState</p>
+            <p>Description: @Model.Advert.Product.Description</p>
+            <p>Price: €@Model.Advert.Product.Price</p>
+            <p>Count: @Model.Advert.Quantity</p>
         </div>
     </div>
 }
