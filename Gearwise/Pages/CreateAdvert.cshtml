@@ -30,10 +30,9 @@
     <div class="form-group d-flex align-items-center">
         <label class="me-2">Product Title</label>
         <select asp-for="Advert.ProductId" asp-items="Model.ProductList" class="form-select"></select>
-        <button type="submit" asp-page-handler="DeleteProduct" class="btn btn-danger me-2">❌</button>
+        <button type="submit" asp-page-handler="DeleteProduct" class="btn btn-danger">❌</button>
         <button type="submit" asp-page-handler="EditProduct" class="btn btn-primary">✏️</button>
-
-        <a asp-page="/ProductCreate" class="btn btn-outline-secondary ms-2">+</a>
+        <a asp-page="/ProductCreate" class="btn btn-success" style="color:lightgreen">➕</a>
     </div>
     <br />
     <h6>Disclaimer: mocht uw product niet erbij staan druk op (+) en voeg hem toe</h6>
