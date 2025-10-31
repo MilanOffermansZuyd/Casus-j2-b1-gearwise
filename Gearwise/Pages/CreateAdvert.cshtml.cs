@@ -10,11 +10,11 @@ namespace Gearwise.Pages
 {
     public class CreateAdvertModel : PageModel
     {
-        private readonly GearwiseDbContext Context;
+        private readonly GearwiseDatabase Db;
 
-        public CreateAdvertModel(GearwiseDbContext context)
+        public CreateAdvertModel(GearwiseDatabase db)
         {
-            Context = context;
+            Db = db;
         }
 
         [BindProperty]
@@ -27,20 +27,21 @@ namespace Gearwise.Pages
         public SelectList CategoryList { get; set; }
         public SelectList SellerList { get; set; }
         public SelectList ProductList { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            BrandList = new SelectList(await Context.Brands.ToListAsync(), "BrandId", "Name");
-            CategoryList = new SelectList(await Context.Categories.ToListAsync(), "CategoryId", "Name");
-            SellerList = new SelectList(await Context.Users.ToListAsync(), "UserId", "FullName");
-            ProductList = new SelectList(await Context.Products.ToListAsync(), "ProductId", "Name");
+            BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
+            CategoryList = new SelectList(await Db.GetCategoriesAsync(), "CategoryId", "Name");
+            SellerList = new SelectList(await Db.GetUsersAsync(), "UserId", "FullName");
+            ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
 
-            if (id == null)
+            if (id is null)
             {
                 Advert = new Advert();
             }
             else
             {
-                Advert = await Context.Adverts.FirstOrDefaultAsync(a => a.AdvertId == id);
+                Advert = await Db.GetAdvertAsync(id.Value);
 
                 if (Advert == null)
                     return NotFound();
@@ -54,26 +55,68 @@ namespace Gearwise.Pages
             if (!ModelState.IsValid)
             {
                 Errormessage = "Pas de velden aan";
-                BrandList = new SelectList(await Context.Brands.ToListAsync(), "BrandId", "Name");
-                CategoryList = new SelectList(await Context.Categories.ToListAsync(), "CategoryId", "Name");
-                SellerList = new SelectList(await Context.Users.ToListAsync(), "UserId", "FullName");
-                ProductList = new SelectList(await Context.Products.ToListAsync(), "ProductId", "Name");
+                BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
+                CategoryList = new SelectList(await Db.GetCategoriesAsync(), "CategoryId", "Name");
+                SellerList = new SelectList(await Db.GetUsersAsync(), "UserId", "FullName");
+                ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
                 return Page();
             }
 
             if (Advert is null) 
             {
                 Errormessage = "Oops er iets fout gegaan probeer het later nog eens.";
-                BrandList = new SelectList(await Context.Brands.ToListAsync(), "BrandId", "Name");
-                CategoryList = new SelectList(await Context.Categories.ToListAsync(), "CategoryId", "Name");
-                SellerList = new SelectList(await Context.Users.ToListAsync(), "UserId", "FullName");
-                ProductList = new SelectList(await Context.Products.ToListAsync(), "ProductId", "Name");
+                BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
+                CategoryList = new SelectList(await Db.GetCategoriesAsync(), "CategoryId", "Name");
+                SellerList = new SelectList(await Db.GetUsersAsync(), "UserId", "FullName");
+                ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
                 return Page();
             }
-            Context.Adverts.Add(Advert);
-
-            await Context.SaveChangesAsync();
+            await Db.AddAdvertAsync(Advert);
             return RedirectToPage("index");
+        }
+
+        public async Task<IActionResult> OnPostDeleteProductAsync() 
+        {
+            int selectedProductId = Advert.ProductId;
+            if (selectedProductId == null || selectedProductId == 0) 
+            {
+                Errormessage = "Selecteer een product die u wilt verwijderen.";
+                BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
+                CategoryList = new SelectList(await Db.GetCategoriesAsync(), "CategoryId", "Name");
+                SellerList = new SelectList(await Db.GetUsersAsync(), "UserId", "FullName");
+                ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
+                return Page();
+            }
+
+
+            var result = await Db.DeleteProductAsync(selectedProductId);
+            if (!result) 
+            {
+                Errormessage = "Oops er iets fout gegaan met verwijderen.";
+                BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
+                CategoryList = new SelectList(await Db.GetCategoriesAsync(), "CategoryId", "Name");
+                SellerList = new SelectList(await Db.GetUsersAsync(), "UserId", "FullName");
+                ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
+                return Page();
+            }
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostEditProductAsync() 
+        {
+            int selectedProductId = Advert.ProductId;
+
+            if (selectedProductId == null || selectedProductId == 0)
+            {
+                Errormessage = "Selecteer een product die u wilt verwijderen.";
+                BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
+                CategoryList = new SelectList(await Db.GetCategoriesAsync(), "CategoryId", "Name");
+                SellerList = new SelectList(await Db.GetUsersAsync(), "UserId", "FullName");
+                ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
+                return Page();
+            }
+
+            return RedirectToPage("ProductEdit", new { id = selectedProductId });
         }
     }
 }
