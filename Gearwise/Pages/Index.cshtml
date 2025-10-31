@@ -48,7 +48,7 @@
                                         <a asp-route-id="@advert.AdvertId" asp-page="/AdvertDetail" class="btn btn-sm btn-outline-primary">Bekijk</a>
                                     </div>
                                     <div class="card-footer text-center bg-transparent border-top-0">
-                                        <a asp-route-id="@advert.AdvertId" asp-page="/UpdateDetails" class="btn btn-sm btn-outline-warning">aanpassen</a>
+                                        <a asp-route-id="@advert.AdvertId" asp-page="/UpdateAdvertDetails" class="btn btn-sm btn-outline-warning">aanpassen</a>
                                     </div>
                                     <form method="post" asp-page-handler="Delete" asp-route-id="@advert.AdvertId"
                                           onsubmit="return confirm('Weet je zeker dat je deze advertentie wilt verwijderen?');"
