@@ -1,0 +1,174 @@
+﻿@page
+@model Gearwise.Pages.AdminPageModel
+@{
+    ViewData["Title"] = "Admin page";
+}
+
+<h1>Dit is de admin page</h1>
+
+<div>
+    <form>
+        <a asp-page="/AdminPage" asp-route-view="ManageUsers" class="btn btn-primary">Beheer Gebruikers</a>
+        <a asp-page="/AdminPage" asp-route-view="ManageAdverts" class="btn btn-primary">Beheer Advertenties</a>
+        <a asp-page="/AdminPage" asp-route-view="ManageBrands" class="btn btn-primary">Beheer Merken</a>
+        <a asp-page="/AdminPage" asp-route-view="ManageCategories" class="btn btn-primary">Beheer Categorieën</a>
+    </form>
+</div>
+
+@if (Model.View == "ManageUsers")
+{
+    <h3>Users</h3>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model.Users)
+                {
+                    <tr>
+                        <td>@u.UserId</td>
+                        <td>@u.FirstName</td>
+                        <td>@u.LastName</td>
+                        <td>@u.Email</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <form method="post" asp-page-handler="VerwijderUser">
+                                    <input type="hidden" name="id" value="@u.UserId" />
+                                    <button class="btn btn-danger">Verwijder</button>
+                                </form>
+
+                                <form method="post" asp-page-handler="UpdateUser">
+                                    <input type="hidden" name="id" value="@u.UserId" />
+                                    <button class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (Model.View == "ManageAdverts")
+{
+    <h3>Adverts</h3>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Seller name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model.Adverts)
+                {
+                    <tr>
+                        <td>@a.AdvertId</td>
+                        <td>@a.Title</td>
+                        <td>@a.Seller.FullName</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <form method="post" asp-page-handler="VerwijderAdvert">
+                                    <input type="hidden" name="id" value="@a.AdvertId" />
+                                    <button class="btn btn-danger">Verwijder</button>
+                                </form>
+
+                                <form method="post" asp-page-handler="UpdateAdvert">
+                                    <input type="hidden" name="id" value="@a.AdvertId" />
+                                    <button class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (Model.View == "ManageBrands")
+{
+    <h3>Brands</h3>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var b in Model.Brands)
+                {
+                    <tr>
+                        <td>@b.BrandId</td>
+                        <td>@b.Name</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <form method="post" asp-page-handler="VerwijderBrand">
+                                    <input type="hidden" name="id" value="@b.BrandId" />
+                                    <button class="btn btn-danger">Verwijder</button>
+                                </form>
+
+                                <form method="post" asp-page-handler="UpdateBrand">
+                                    <input type="hidden" name="id" value="@b.BrandId" />
+                                    <button class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (Model.View == "ManageCategories")
+{
+    <h3>Categories</h3>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.Categories)
+                {
+                    <tr>
+                        <td>@c.CategoryId</td>
+                        <td>@c.Name</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <form method="post" asp-page-handler="VerwijderCategory">
+                                    <input type="hidden" name="id" value="@c.CategoryId" />
+                                    <button class="btn btn-danger">Verwijder</button>
+                                </form>
+
+                                <form method="post" asp-page-handler="UpdateCategory">
+                                    <input type="hidden" name="id" value="@c.CategoryId" />
+                                    <button class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
