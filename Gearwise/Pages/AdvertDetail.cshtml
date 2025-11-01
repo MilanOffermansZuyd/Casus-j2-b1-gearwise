@@ -12,11 +12,16 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">@Model.Advert.Product.Name</h4>
-            <p>Serial: Number: @Model.Advert.Product.Serialnumber</p>
+            <p>Serial Number: @Model.Advert.Product.Serialnumber</p>
             <p>Status:@Model.Advert.Product.ProductState</p>
             <p>Description: @Model.Advert.Product.Description</p>
             <p>Price: €@Model.Advert.Product.Price</p>
             <p>Count: @Model.Advert.Quantity</p>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Product specificaties</h4>
+            <p>Brand:  @Model.Advert.Product.ProductSpecification.Brand.Name</p>
+            <p>Category: @Model.Advert.Product.ProductSpecification.Category.Name</p>
         </div>
     </div>
 }
@@ -29,14 +34,13 @@
         {
             <a asp-page-handler="GearwisePedia"
                asp-route-id="@Model.Advert.AdvertId"
-               class="btn btn-outline-primary">Bekijk</a>
+               class="btn btn-outline-primary">Bekijk Wiki</a>
         }
         else
         {
-            <a asp-page="/GearwisePedia/Create"
-               asp-route-brandId="@Model.Advert.BrandId"
-               asp-route-categoryId="@Model.Advert.CategoryId"
-               class="btn btn-outline-primary">Voeg toe</a>
+            <a asp-page="/GearwisePediaCreate"
+               asp-route-specificationId="@Model.Advert.Product.ProductSpecificationId"
+               class="btn btn-outline-primary">Voeg een wiki toe</a>
         }
 
         <a asp-page="/Index" class="btn btn-outline-danger">Terug</a>
@@ -51,11 +55,11 @@
         <div class="card-body">
             <h3 class="card-title">@Model.GearwisePedia.Title</h3>
             <p class="card-text">@Model.GearwisePedia.Body</p>
+            <a asp-page="/GearwisePediaEdit"
+               asp-route-gearwiseId="@Model.Advert.Product.ProductSpecification.GearwisePedia.GearwisePediaId"
+               asp-route-specificationId="@Model.Advert.Product.ProductSpecificationId"
+               class="btn btn-outline-warning">Bewerken</a>
 
-            <div class="mt-3 d-flex gap-2">
-                <a asp-page="/GearwisePedia/Edit"
-                   asp-route-id="@Model.GearwisePedia.GearwisePediaId"
-                   class="btn btn-outline-warning">Bewerken</a>
 
                 @*<form method="post" asp-page-handler="DeleteGearwisePedia"
                       asp-route-id="@Model.GearwisePedia.GearwisePediaId"
@@ -92,5 +96,4 @@
                 </div>
             </div>
         </div>
-    </div>
 }

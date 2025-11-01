@@ -3,20 +3,17 @@ using Gearwise.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Gearwise.Pages
 {
-    public class CreateAdvertModel : PageModel
+    public class UpdateAdvertDetailsModel : PageModel
     {
         private readonly GearwiseDatabase Db;
-
-        public CreateAdvertModel(GearwiseDatabase db)
+        public UpdateAdvertDetailsModel(GearwiseDatabase db)
         {
             Db = db;
         }
-
         [BindProperty]
         public Advert? Advert { get; set; }
 
@@ -28,12 +25,20 @@ namespace Gearwise.Pages
         public SelectList SellerList { get; set; }
         public SelectList ProductList { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int id)
         {
+            if (id == null)
+            {
+                return RedirectToPage("Index");
+            }
+            Advert = await Db.GetAdvertAsync(id);
             BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
             CategoryList = new SelectList(await Db.GetCategoriesAsync(), "CategoryId", "Name");
             SellerList = new SelectList(await Db.GetUsersAsync(), "UserId", "FullName");
             ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
+
+            Response.Cookies.Append("AdvertId", id.ToString());
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -48,7 +53,7 @@ namespace Gearwise.Pages
                 return Page();
             }
 
-            if (Advert is null) 
+            if (Advert is null)
             {
                 Errormessage = "Oops er iets fout gegaan probeer het later nog eens.";
                 BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
@@ -57,14 +62,22 @@ namespace Gearwise.Pages
                 ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
                 return Page();
             }
-            await Db.AddAdvertAsync(Advert);
+
+            if (!int.TryParse(Request.Cookies["AdvertId"], out var advertId))
+            {
+                Errormessage = "someting went wrong";
+                return Page();
+            }
+
+            Advert.AdvertId = advertId;
+            await Db.EditAdvertAsync(Advert);
             return RedirectToPage("index");
         }
 
-        public async Task<IActionResult> OnPostDeleteProductAsync() 
+        public async Task<IActionResult> OnPostDeleteProductAsync()
         {
             int selectedProductId = Advert.ProductId;
-            if (selectedProductId == null || selectedProductId == 0) 
+            if (selectedProductId == null || selectedProductId == 0)
             {
                 Errormessage = "Selecteer een product die u wilt verwijderen.";
                 BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
@@ -76,7 +89,7 @@ namespace Gearwise.Pages
 
 
             var result = await Db.DeleteProductAsync(selectedProductId);
-            if (!result) 
+            if (!result)
             {
                 Errormessage = "Oops er iets fout gegaan met verwijderen.";
                 BrandList = new SelectList(await Db.GetBrandsAsync(), "BrandId", "Name");
@@ -88,7 +101,7 @@ namespace Gearwise.Pages
             return RedirectToPage("index");
         }
 
-        public async Task<IActionResult> OnPostEditProductAsync() 
+        public async Task<IActionResult> OnPostEditProductAsync()
         {
             int selectedProductId = Advert.ProductId;
 
@@ -106,4 +119,3 @@ namespace Gearwise.Pages
         }
     }
 }
-

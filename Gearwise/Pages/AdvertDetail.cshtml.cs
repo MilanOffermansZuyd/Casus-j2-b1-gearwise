@@ -28,7 +28,7 @@ namespace Gearwise.Pages
             if (Advert != null)
             {
                 Product = Advert.Product;
-                GearwisePedia = await Database.GetGearwisePediaByAdvertAsync(Advert.BrandId, Advert.CategoryId);
+                GearwisePedia = await Database.GetGearwisePediaByProductSpecification(Advert.Product.ProductSpecificationId);
             }
         }
 
@@ -39,7 +39,7 @@ namespace Gearwise.Pages
 
             if (Advert != null)
             {
-                GearwisePedia = await Database.GetGearwisePediaByAdvertAsync(Advert.BrandId, Advert.CategoryId);
+                GearwisePedia = await Database.GetGearwisePediaByProductSpecification(Advert.Product.ProductSpecificationId);
 
                 if (GearwisePedia != null)
                 {

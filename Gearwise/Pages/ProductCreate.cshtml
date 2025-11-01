@@ -1,0 +1,62 @@
+﻿@page
+@using Gearwise.Models.Enums
+@model Gearwise.Pages.ProductCreateModel
+@{
+}
+
+<h2>Nieuw product</h2>
+@if (Model.Errormessage is not null)
+{
+    <h6 style="color:red">@Model.Errormessage</h6>
+}
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Product.Name"></label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Serialnumber"></label>
+        <input asp-for="Product.Serialnumber" class="form-control" />
+        <span asp-validation-for="Product.Serialnumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.ProductState"></label>
+        <select asp-for="Product.ProductState" asp-items="Html.GetEnumSelectList<ProductStates>()" class="form-select"></select>
+        <span asp-validation-for="Product.ProductState" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Description"></label>
+        <textarea asp-for="Product.Description" class="form-control"></textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Price"></label>
+        <input asp-for="Product.Price" class="form-control" />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+
+    <fieldset class="border p-3 mt-3">
+        <legend class="w-auto">Product Specificatie</legend>
+
+        <div class="form-group">
+            <label asp-for="Product.ProductSpecification.BrandId">Merk</label>
+            <select asp-for="Product.ProductSpecification.BrandId" asp-items="Model.BrandList" class="form-select"></select>
+            <span asp-validation-for="Product.ProductSpecification.BrandId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Product.ProductSpecification.CategoryId">Categorie</label>
+            <select asp-for="Product.ProductSpecification.CategoryId" asp-items="Model.CategoryList" class="form-select"></select>
+            <span asp-validation-for="Product.ProductSpecification.CategoryId" class="text-danger"></span>
+        </div>
+    </fieldset>
+
+    <input type="submit" class="btn btn-primary mt-3" value="Opslaan" />
+    <a asp-page="/Index" class="btn btn-outline-danger mt-3">Terug</a>
+</form>

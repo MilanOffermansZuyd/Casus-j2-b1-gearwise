@@ -27,12 +27,12 @@ namespace Gearwise.Data
         {
 
             modelBuilder.Entity<Brand>()
-                .HasMany(b => b.Adverts)
+                .HasMany<Advert>()
                 .WithOne(a => a.Brand)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Category>()
-                .HasMany(c => c.Adverts)
+                .HasMany<Advert>()
                 .WithOne(a => a.Category)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
@@ -61,12 +61,21 @@ namespace Gearwise.Data
                 .WithOne(ps => ps.Category)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
+            modelBuilder.Entity<Product>()
+                .HasMany<Advert>()
+                .WithOne(a => a.Product)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<ProductSpecification>()
-               .HasMany<GearwisePedia>()
-               .WithOne(gp => gp.ProductSpecification)
-               .OnDelete(DeleteBehavior.ClientCascade);
+                .HasOne<Product>()
+                .WithOne(ps => ps.ProductSpecification)
+                .OnDelete(DeleteBehavior.Cascade);
 
-
+            modelBuilder.Entity<ProductSpecification>()
+                .HasOne(ps => ps.GearwisePedia)
+                .WithOne()
+                .HasForeignKey<ProductSpecification>(ps => ps.GearwisePediaId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             base.OnModelCreating(modelBuilder);
 
@@ -121,16 +130,17 @@ namespace Gearwise.Data
                 );
 
             modelBuilder.Entity<ProductSpecification>().HasData(
-                new ProductSpecification(1, 1, 1),
-                new ProductSpecification(2, 2, 2),
-                new ProductSpecification(3, 1, 3),
-                new ProductSpecification(4, 3, 4)
+                new ProductSpecification(1, 1, 1,1),
+                new ProductSpecification(2, 2, 2, 2),
+                new ProductSpecification(3, 1, 3, 3),
+                new ProductSpecification(4, 3, 4, 4)
                 );
 
             modelBuilder.Entity<GearwisePedia>().HasData(
-                new GearwisePedia(1, "Continental Banden", "Continental is een Duits bandenmerk bekend om zijn duurzaamheid en prestaties", 1),
-                new GearwisePedia(2, "Vredestein Schokdempers", "Vredestein produceert hoogwaardige schokdempers met een focus op comfort", 2),
-                new GearwisePedia(3, "Continental Uitlaten", "Continental biedt ook RVS uitlaten aan die bekendstaan om hun lange levensduur", 3)
+                new GearwisePedia(1, "Continental Banden", "Continental is een Duits bandenmerk bekend om zijn duurzaamheid en prestaties"),
+                new GearwisePedia(2, "Vredestein Schokdempers", "Vredestein produceert hoogwaardige schokdempers met een focus op comfort"),
+                new GearwisePedia(3, "Continental Uitlaten", "Continental biedt ook RVS uitlaten aan die bekendstaan om hun lange levensduur"),
+                new GearwisePedia(4, "Velgen", "lekker van licht metalen beter voor je rug als je ze moet vervangen")
                 );
         }
     }

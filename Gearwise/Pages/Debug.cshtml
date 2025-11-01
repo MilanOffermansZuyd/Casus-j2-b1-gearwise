@@ -197,7 +197,7 @@
     <tr>
         <th>GearwisePediaId:</th>
         <th>Titel:</th>
-        <th>ProductSpecificationId:</th>
+        <th>description:</th>
 
     </tr>
     @foreach (var g in Model.GearwisePedias)
@@ -205,7 +205,7 @@
         <tr>
             <td>@g.GearwisePediaId</td>
             <td>@g.Title</td>
-            <td>@g.ProductSpecification.ProductSpecificationId</td>
+            <td>@g.Body</td>
         </tr>
     }
 </table>

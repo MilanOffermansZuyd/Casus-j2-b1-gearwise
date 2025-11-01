@@ -1,9 +1,8 @@
-﻿@page
-@model Gearwise.Pages.CreateAdvertModel
+﻿@page "id"
+@model Gearwise.Pages.UpdateAdvertDetailsModel
 @{
 }
-
-<h1>Create advert</h1>
+<h1>Edit advert : @Model.Advert.Title</h1>
 
 <form method="post">
     <div class="form-group d-flex align-items-center">
@@ -19,14 +18,14 @@
         <label asp-for="Advert.CategoryId" class="me-2">Categorie</label>
         <select asp-for="Advert.CategoryId" asp-items="Model.CategoryList" class="form-select"></select>
     </div>
-    <br/>
+    <br />
     <h6>Disclaimer: mocht uw Merk en/of Categorie niet erbij staan vraag het de beheerder</h6>
     <hr />
     <div class="form-group d-flex align-items-center">
         <label asp-for="Advert.SellerId" class="me-2">Verkoper</label>
         <select asp-for="Advert.SellerId" asp-items="Model.SellerList" class="form-select"></select>
     </div>
-    <hr/>
+    <hr />
     <div class="form-group d-flex align-items-center">
         <label class="me-2">Product Title</label>
         <select asp-for="Advert.ProductId" asp-items="Model.ProductList" class="form-select"></select>
@@ -36,7 +35,7 @@
     </div>
     <br />
     <h6>Disclaimer: mocht uw product niet erbij staan druk op (+) en voeg hem toe</h6>
-    <hr/>
+    <hr />
 
     <div class="form-group">
         <label asp-for="Advert.Quantity">Aantal</label>
@@ -45,7 +44,7 @@
 
     @if (Model.Errormessage is not null)
     {
-        <h2 style="color:red">@Model.Errormessage</h2>    
+        <h2 style="color:red">@Model.Errormessage</h2>
     }
 
     <button type="submit" class="btn btn-primary">Opslaan</button>
