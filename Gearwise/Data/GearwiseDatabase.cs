@@ -132,6 +132,9 @@ namespace Gearwise.Data
                 .Include(a => a.Category)
                 .Include(a => a.Seller)
                 .Include(a => a.Product)
+                .Include(a => a.Product!.ProductSpecification)
+                .Include(a => a.Product!.ProductSpecification.Brand)
+                .Include(a => a.Product!.ProductSpecification.Category)
                 .FirstOrDefaultAsync(a => a.AdvertId == id);
         }
 
