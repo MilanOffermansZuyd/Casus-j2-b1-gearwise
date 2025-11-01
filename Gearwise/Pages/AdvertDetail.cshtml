@@ -38,9 +38,8 @@
         }
         else
         {
-            <a asp-page="/GearwisePedia/Create"
-               asp-route-brandId="@Model.Advert.BrandId"
-               asp-route-categoryId="@Model.Advert.CategoryId"
+            <a asp-page="/GearwisePediaCreate"
+               asp-route-specificationId="@Model.Advert.Product.ProductSpecificationId"
                class="btn btn-outline-primary">Voeg een wiki toe</a>
         }
 
@@ -56,11 +55,11 @@
         <div class="card-body">
             <h3 class="card-title">@Model.GearwisePedia.Title</h3>
             <p class="card-text">@Model.GearwisePedia.Body</p>
+            <a asp-page="/GearwisePediaEdit"
+               asp-route-gearwiseId="@Model.Advert.Product.ProductSpecification.GearwisePedia.GearwisePediaId"
+               asp-route-specificationId="@Model.Advert.Product.ProductSpecificationId"
+               class="btn btn-outline-warning">Bewerken</a>
 
-            <div class="mt-3 d-flex gap-2">
-                <a asp-page="/GearwisePedia/Edit"
-                   asp-route-id="@Model.GearwisePedia.GearwisePediaId"
-                   class="btn btn-outline-warning">Bewerken</a>
 
                 @*<form method="post" asp-page-handler="DeleteGearwisePedia"
                       asp-route-id="@Model.GearwisePedia.GearwisePediaId"
@@ -97,5 +96,4 @@
                 </div>
             </div>
         </div>
-    </div>
 }

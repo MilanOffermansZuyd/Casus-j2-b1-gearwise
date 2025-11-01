@@ -85,7 +85,7 @@ namespace Gearwise.Pages
                 ProductList = new SelectList(await Db.GetProductsAsync(), "ProductId", "Name");
                 return Page();
             }
-            return RedirectToPage();
+            return RedirectToPage("index");
         }
 
         public async Task<IActionResult> OnPostEditProductAsync() 

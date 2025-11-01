@@ -1,5 +1,6 @@
 ﻿using Gearwise.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Gearwise.Data
 {
@@ -134,18 +135,18 @@ namespace Gearwise.Data
                 .FirstOrDefaultAsync(a => a.AdvertId == id);
         }
 
-        public async Task<GearwisePedia?> GetGearwisePediaByAdvertAsync(int brandId, int categoryId)
+        public async Task<GearwisePedia?> GetGearwisePediaByProductSpecification(int productSpecificationId)
         {
             var productSpecification = await Database.ProductSpecifications
-                .FirstOrDefaultAsync(ps => ps.BrandId == brandId && ps.CategoryId == categoryId);
+                .Include(x => x.GearwisePedia)
+                .FirstOrDefaultAsync(ps => ps.ProductSpecificationId == productSpecificationId);
 
             if (productSpecification == null)
             {
                 return null;
             }
 
-            return await Database.GearwisePedias
-                .FirstOrDefaultAsync(gp => gp.ProductSpecificationId == productSpecification.ProductSpecificationId);
+            return productSpecification.GearwisePedia;
         }
 
         // CREATE
@@ -487,56 +488,73 @@ namespace Gearwise.Data
         public async Task<List<GearwisePedia>> GetGearwisePediasAsync()
         {
             return await Database.GearwisePedias
-                .Include(g => g.ProductSpecification)
-                .ThenInclude(ps => ps.Brand)
-                .Include(g => g.ProductSpecification)
-                .ThenInclude(ps => ps.Category)
                 .ToListAsync();
         }
 
         public async Task<GearwisePedia?> GetGearwisePediaAsync(int id)
         {
             return await Database.GearwisePedias
-                .Include(g => g.ProductSpecification)
-                .ThenInclude(ps => ps.Brand)
-                .Include(g => g.ProductSpecification)
-                .ThenInclude(ps => ps.Category)
                 .FirstOrDefaultAsync(g => g.GearwisePediaId == id);
         }
 
         // CREATE
-        public async Task<GearwisePedia> AddGearwisePediaAsync(GearwisePedia gearwisePedia)
+        public async Task<GearwisePedia> AddGearwisePediaAsync(int productSpecificationId, GearwisePedia gearwisePedia)
         {
-            Database.GearwisePedias.Add(gearwisePedia);
+            var productSpec = await Database.ProductSpecifications
+                .FirstOrDefaultAsync(ps => ps.ProductSpecificationId == productSpecificationId);
+
+            if (productSpec == null)
+                throw new InvalidOperationException("ProductSpecification not found");
+
+            // Koppel 1:1 relatie
+            productSpec.GearwisePedia = gearwisePedia;
+
             await Database.SaveChangesAsync();
+
             return gearwisePedia;
         }
 
         // UPDATE
-        public async Task<GearwisePedia?> EditGearwisePediaAsync(GearwisePedia gearwisePedia)
+        public async Task<GearwisePedia?> EditGearwisePediaAsync(int gearwisePediaId, GearwisePedia updatedGearwisePedia)
         {
-            var ExistingGearwisePedia = await GetGearwisePediaAsync(gearwisePedia.GearwisePediaId);
-            if (ExistingGearwisePedia != null)
-            {
-                Database.Entry(ExistingGearwisePedia).CurrentValues.SetValues(gearwisePedia);
+            var existing = await Database.GearwisePedias
+                .FirstOrDefaultAsync(g => g.GearwisePediaId == gearwisePediaId);
 
-                ExistingGearwisePedia.ProductSpecificationId = gearwisePedia.ProductSpecificationId;
-            }
+            if (existing == null) 
+            {
+                return null;
+            };
+
+            existing.Title = updatedGearwisePedia.Title;
+            existing.Body = updatedGearwisePedia.Body;
+
             await Database.SaveChangesAsync();
-            return ExistingGearwisePedia;
+            return updatedGearwisePedia;
         }
 
         // DELETE
         public async Task<bool> DeleteGearwisePediaAsync(int id)
         {
-            var GearwisePedia = await GetGearwisePediaAsync(id);
-            if (GearwisePedia != null)
+            var gearwisePedia = await GetGearwisePediaAsync(id);
+
+            if (gearwisePedia == null) 
             {
-                Database.GearwisePedias.Remove(GearwisePedia);
-                await Database.SaveChangesAsync();
-                return true;
+                return false;
             }
-            return false;
+
+            var productSpecification = await Database.ProductSpecifications
+                .FirstOrDefaultAsync(x => x.GearwisePediaId == id);
+
+            if (productSpecification != null)
+            {
+                productSpecification.GearwisePediaId = null;
+                productSpecification.GearwisePedia = null;
+            }
+
+            Database.GearwisePedias.Remove(gearwisePedia);
+            await Database.SaveChangesAsync();
+
+            return true;
         }
 
 
