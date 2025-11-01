@@ -5,9 +5,9 @@
         public int ProductSpecificationId { get; set; }
 
         public int BrandId { get; set; }
-        public Brand Brand { get; set; }
+        public Brand? Brand { get; set; }
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
         public int? GearwisePediaId { get; set; }
         public GearwisePedia? GearwisePedia { get; set; }
