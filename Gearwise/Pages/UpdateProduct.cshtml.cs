@@ -8,10 +8,10 @@ using System.Net;
 
 namespace Gearwise.Pages
 {
-    public class ProductEditModel : PageModel
+    public class UpdateProductModel : PageModel
     {
         private readonly GearwiseDatabase Db;
-        public ProductEditModel(GearwiseDatabase db)
+        public UpdateProductModel(GearwiseDatabase db)
         {
             Db = db;
         }

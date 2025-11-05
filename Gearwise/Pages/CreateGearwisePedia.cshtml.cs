@@ -2,14 +2,13 @@ using Gearwise.Data;
 using Gearwise.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Linq;
 
 namespace Gearwise.Pages
 {
-    public class GearwisePediaCreateModel : PageModel
+    public class CreateGearwisePediaModel : PageModel
     {
         private readonly GearwiseDatabase Db;
-        public GearwisePediaCreateModel(GearwiseDatabase db)
+        public CreateGearwisePediaModel(GearwiseDatabase db)
         {
             Db = db;
         }

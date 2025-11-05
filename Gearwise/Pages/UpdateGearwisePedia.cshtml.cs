@@ -3,14 +3,13 @@ using Gearwise.Models;
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Tasks;
 
 namespace Gearwise.Pages
 {
-    public class GearwisePediaEditModel : PageModel
+    public class UpdateGearwisePediaModel : PageModel
     {
         private readonly GearwiseDatabase Db;
-        public GearwisePediaEditModel(GearwiseDatabase db)
+        public UpdateGearwisePediaModel(GearwiseDatabase db)
         {
             Db = db;
         }

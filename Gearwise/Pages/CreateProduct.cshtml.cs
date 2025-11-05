@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Gearwise.Pages
 {
-    public class ProductCreateModel : PageModel
+    public class CreateProductModel : PageModel
     {
         private readonly GearwiseDatabase Db;
 
-        public ProductCreateModel(GearwiseDatabase db)
+        public CreateProductModel(GearwiseDatabase db)
         {
             Db = db;
         }

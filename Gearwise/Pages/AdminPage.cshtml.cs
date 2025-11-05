@@ -72,5 +72,68 @@ namespace Gearwise.Pages
                 Categories.Add(c);
             }
         }
+
+        public async Task<IActionResult> OnPostVerwijderCategoryAsync(int id) 
+        {
+            if (id == null) 
+            {
+                return Page();
+            }
+            var result = await Database.DeleteCategoryAsync(id);
+
+            if (!result) 
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("adminpage", new { View = "ManageCategories" });
+        }
+
+        public async Task<IActionResult> OnPostVerwijderBrandAsync(int id)
+        {
+            if (id == null)
+            {
+                return Page();
+            }
+            var result = await Database.DeleteBrandAsync(id);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("adminpage", new { View = "ManageBrands" });
+        }
+
+        public async Task<IActionResult> OnPostVerwijderAdvertAsync(int id)
+        {
+            if (id == null)
+            {
+                return Page();
+            }
+            var result = await Database.DeleteAdvertAsync(id);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("adminpage", new { View = "ManageAdverts" });
+        }
+        public async Task<IActionResult> OnPostVerwijderUserAsync(int id)
+        {
+            if (id == null)
+            {
+                return Page();
+            }
+            var result = await Database.DeleteUserAsync(id);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("adminpage", new { View = "ManageUsers" });
+        }
     }
 }

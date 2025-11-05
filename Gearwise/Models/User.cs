@@ -13,8 +13,6 @@ namespace Gearwise.Models
         public string? Phone { get; set; }
         public RoleStates RoleStates { get; set; }
 
-        public List<Advert> Adverts { get; set; } = new List<Advert>();
-
         public User() { }
 
         public User(int userId, string firstName, string lastName, string email, string password, string? phone, RoleStates roleState)
