@@ -124,7 +124,7 @@ namespace Gearwise.Data
                 .Include(a => a.Product)
                 .ToListAsync();
         }
-        
+
         public async Task<Advert?> GetAdvertAsync(int id)
         {
             return await Database.Adverts
@@ -235,7 +235,7 @@ namespace Gearwise.Data
                 Database.Messages.Remove(Message);
                 await Database.SaveChangesAsync();
                 return true;
-            }    
+            }
             return false;
         }
 
@@ -463,7 +463,12 @@ namespace Gearwise.Data
         // UPDATE
         public async Task<Category?> EditCategoryAsync(Category category)
         {
-            var ExistingCategory = await GetCategoryAsync(category.CategoryId);
+            if (category.CategoryId is null)
+            {
+                return null;
+            }
+
+            var ExistingCategory = await GetCategoryAsync(category.CategoryId.Value);
             if (ExistingCategory != null)
             {
                 Database.Entry(ExistingCategory).CurrentValues.SetValues(category);
@@ -523,10 +528,11 @@ namespace Gearwise.Data
             var existing = await Database.GearwisePedias
                 .FirstOrDefaultAsync(g => g.GearwisePediaId == gearwisePediaId);
 
-            if (existing == null) 
+            if (existing == null)
             {
                 return null;
-            };
+            }
+            ;
 
             existing.Title = updatedGearwisePedia.Title;
             existing.Body = updatedGearwisePedia.Body;
@@ -540,7 +546,7 @@ namespace Gearwise.Data
         {
             var gearwisePedia = await GetGearwisePediaAsync(id);
 
-            if (gearwisePedia == null) 
+            if (gearwisePedia == null)
             {
                 return false;
             }
@@ -584,7 +590,11 @@ namespace Gearwise.Data
         // UPDATE
         public async Task<Brand?> EditBrandAsync(Brand brand)
         {
-            var ExistingBrand = await GetBrandAsync(brand.BrandId);
+            if (brand.BrandId is null)
+            {
+                return null;
+            }
+            var ExistingBrand = await GetBrandAsync(brand.BrandId.Value);
             if (ExistingBrand != null)
             {
                 Database.Entry(ExistingBrand).CurrentValues.SetValues(brand);
