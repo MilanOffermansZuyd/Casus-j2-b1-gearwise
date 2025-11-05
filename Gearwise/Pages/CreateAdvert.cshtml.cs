@@ -88,7 +88,7 @@ namespace Gearwise.Pages
             return RedirectToPage("index");
         }
 
-        public async Task<IActionResult> OnPostEditProductAsync() 
+        public async Task<IActionResult> OnPostUpdateProductAsync() 
         {
             int selectedProductId = Advert.ProductId;
 
@@ -102,7 +102,7 @@ namespace Gearwise.Pages
                 return Page();
             }
 
-            return RedirectToPage("ProductEdit", new { id = selectedProductId });
+            return RedirectToPage("UpdateProduct", new { id = selectedProductId });
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿@page
+@model Gearwise.Pages.CreateBrandModel
+@{
+}
+<form method="post">
+    <label for="brandName">brand name:</label>
+    <input type="text" id="brandName" name="name"/>
+    @if (Model.ErrorMessage is not null)
+    {
+        <h4 style="color:red">@Model.ErrorMessage</h4>
+    }
+    <input type="submit" value="Opslaan"/>
+    <a asp-page="/adminpage" asp-route-View="ManageBrands" class="btn btn-outline-danger">Terug</a>
+</form>

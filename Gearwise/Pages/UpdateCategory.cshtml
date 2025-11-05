@@ -1,0 +1,15 @@
+﻿@page
+@model Gearwise.Pages.UpdateCategoryModel
+@{
+}
+<form method="post">
+    <input type="hidden" id="brandId" name="id"  value="@Model.Category.CategoryId"/>
+    <label for="brandName">Categorie name:</label>
+    <input type="text" id="brandName" name="name" value="@Model.Category.Name" />
+    @if (Model.ErrorMessage is not null)
+    {
+        <h4 style="color:red">@Model.ErrorMessage</h4>
+    }
+    <input type="submit" value="Opslaan" />
+    <a asp-page="/adminpage" asp-route-View="ManageCategories" class="btn btn-outline-danger">Terug</a>
+</form>

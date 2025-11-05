@@ -25,6 +25,7 @@
                     <th>Id</th>
                     <th>First name</th>
                     <th>Last name</th>
+                    <th>Rol</th>
                     <th>Email</th>
                     <th>Actions</th>
                 </tr>
@@ -36,6 +37,7 @@
                         <td>@u.UserId</td>
                         <td>@u.FirstName</td>
                         <td>@u.LastName</td>
+                        <td>@u.RoleStates</td>
                         <td>@u.Email</td>
                         <td>
                             <div class="d-flex gap-2">
@@ -44,10 +46,9 @@
                                     <button class="btn btn-danger">Verwijder</button>
                                 </form>
 
-                                <form method="post" asp-page-handler="UpdateUser">
-                                    <input type="hidden" name="id" value="@u.UserId" />
-                                    <button class="btn btn-primary">Update</button>
-                                </form>
+                                <a asp-route-id="@u.UserId" asp-page="/UpdateUser" class="btn btn-primary">Update</a>
+
+                                <a  asp-page="/CreateUser" class="btn btn-success">Create</a>
                             </div>
                         </td>
                     </tr>
@@ -84,10 +85,7 @@
                                     <button class="btn btn-danger">Verwijder</button>
                                 </form>
 
-                                <form method="post" asp-page-handler="UpdateAdvert">
-                                    <input type="hidden" name="id" value="@a.AdvertId" />
-                                    <button class="btn btn-primary">Update</button>
-                                </form>
+                                <a asp-route-id="@a.AdvertId" asp-page="/UpdateAdvertDetails" class="btn btn-primary">Update</a>
                             </div>
                         </td>
                     </tr>
@@ -122,10 +120,9 @@
                                     <button class="btn btn-danger">Verwijder</button>
                                 </form>
 
-                                <form method="post" asp-page-handler="UpdateBrand">
-                                    <input type="hidden" name="id" value="@b.BrandId" />
-                                    <button class="btn btn-primary">Update</button>
-                                </form>
+                                <a asp-route-id="@b.BrandId" asp-page="/UpdateBrand" class="btn btn-primary">Update</a>
+
+                                <a asp-page="/CreateBrand" class="btn btn-success">Create</a>
                             </div>
                         </td>
                     </tr>
@@ -160,10 +157,9 @@
                                     <button class="btn btn-danger">Verwijder</button>
                                 </form>
 
-                                <form method="post" asp-page-handler="UpdateCategory">
-                                    <input type="hidden" name="id" value="@c.CategoryId" />
-                                    <button class="btn btn-primary">Update</button>
-                                </form>
+                                <a asp-route-id="@c.CategoryId" asp-page="/UpdateCategory" class="btn btn-primary">Update</a>
+
+                                <a asp-page="/CreateCategory" class="btn btn-success">Create</a>
                             </div>
                         </td>
                     </tr>

@@ -1,0 +1,53 @@
+﻿@page
+@using Gearwise.Models.Enums
+@model Gearwise.Pages.CreateUserModel
+@{
+}
+
+<h2>Nieuwe gebruiker</h2>
+
+<form method="post">
+    <div class="form-group d-flex align-items-center mb-2">
+        <label asp-for="User.FirstName" class="me-2"></label>
+        <input asp-for="User.FirstName" class="form-control" />
+        <span asp-validation-for="User.FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex align-items-center mb-2">
+        <label asp-for="User.LastName" class="me-2"></label>
+        <input asp-for="User.LastName" class="form-control" />
+        <span asp-validation-for="User.LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex align-items-center mb-2">
+        <label asp-for="User.Email" class="me-2"></label>
+        <input asp-for="User.Email" class="form-control" type="email" />
+        <span asp-validation-for="User.Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex align-items-center mb-2">
+        <label asp-for="User.Password" class="me-2"></label>
+        <input asp-for="User.Password" class="form-control" type="password" />
+        <span asp-validation-for="User.Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex align-items-center mb-2">
+        <label asp-for="User.Phone" class="me-2"></label>
+        <input asp-for="User.Phone" class="form-control" />
+        <span asp-validation-for="User.Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex align-items-center mb-2">
+        <label asp-for="User.RoleStates" class="me-2">Rol</label>
+        <select asp-for="User.RoleStates" asp-items="Html.GetEnumSelectList<RoleStates>()" class="form-select"></select>
+        <span asp-validation-for="User.RoleStates" class="text-danger"></span>
+    </div>
+
+    @if (Model.Errormessage is not null)
+    {
+        <h4 style="color:red">@Model.Errormessage</h4>
+    }
+
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+    <a asp-page="/adminpage" asp-route-View="ManageUsers" class="btn btn-outline-danger">Terug</a>
+</form>
