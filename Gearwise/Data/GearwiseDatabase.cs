@@ -511,10 +511,11 @@ namespace Gearwise.Data
             var productSpec = await Database.ProductSpecifications
                 .FirstOrDefaultAsync(ps => ps.ProductSpecificationId == productSpecificationId);
 
-            if (productSpec == null)
+            if (productSpec == null) 
+            {
                 throw new InvalidOperationException("ProductSpecification not found");
+            }
 
-            // Koppel 1:1 relatie
             productSpec.GearwisePedia = gearwisePedia;
 
             await Database.SaveChangesAsync();
@@ -532,7 +533,6 @@ namespace Gearwise.Data
             {
                 return null;
             }
-            ;
 
             existing.Title = updatedGearwisePedia.Title;
             existing.Body = updatedGearwisePedia.Body;

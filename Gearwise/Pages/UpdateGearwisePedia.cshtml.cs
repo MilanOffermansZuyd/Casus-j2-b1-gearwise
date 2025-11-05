@@ -40,6 +40,11 @@ namespace Gearwise.Pages
                 ErrorMessage = "ooops something went wrong";
                 return Page();
             }
+            if (!ModelState.IsValid)
+            {
+                ErrorMessage = "voer alle velden in aub";
+                return Page();
+            }
 
             await Db.EditGearwisePediaAsync(gearwiseId, GearwisePedia);
 
